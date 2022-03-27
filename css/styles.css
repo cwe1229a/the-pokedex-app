@@ -1,0 +1,18 @@
+
+
+:root {
+  --primary-color: #ba6e6e;
+  --secondary-color: #ab9b96;
+  --background-color: #f0e7d8;
+  --text-color: #a63a50;
+}
+
+body {
+  background-color: var(--background-color);
+  text-align: center;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-color);
+}
