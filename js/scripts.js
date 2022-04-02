@@ -3,14 +3,14 @@ let pokemonList = [
 { name: "charmander", height: 3, type:["fire"]},
 { name: "squirtle", height: 1, type: ["water"]}
 ];
-// repository for pokemon
+// repository 1 for pokemon
 
-for (let i=0; i <pokemonList.length; i++){
-  if (pokemonList[i].height >2){
-    document.write(pokemonList[i].name + ": </br> " + pokemonList[i].type + " </br>" + pokemonList[i].height + " - " + "That's big! <br/>");
-} else {
-    document.write(pokemonList[i].name + ": </br> " + pokemonList[i].type + " <br/>" + pokemonList[i].height + "<br/>");
-}
-}
+let pokemonList2 = [
+{ name: "clefable", height: 5, type: ["fairy"]},
+{ name: "vulpix", height: 2, type:["fire"]},
+{ name: "oddish", height: 1, type: ["grass", "poison"]}
+];
+// repository 2 for pokemon
 
-//for loop for how big the pokemon are
+//arrow function
+pokemonList.forEach( item => console.log(item) );
