@@ -1,16 +1,28 @@
+//iife format for the pokemon list
+let pokemonRepository = (function () {
+//pokemon array
 let pokemonList = [
 { name: "bulbasaur", height: 2, type: ["grass", "poison"]},
 { name: "charmander", height: 3, type:["fire"]},
-{ name: "squirtle", height: 1, type: ["water"]}
+{ name: "squirtle", height: 1, type: ["water"]},
+{ name: 'blissey', height: 5, type: ["normal"] }
 ];
-// repository 1 for pokemon
 
-let pokemonList2 = [
-{ name: "clefable", height: 5, type: ["fairy"]},
-{ name: "vulpix", height: 2, type:["fire"]},
-{ name: "oddish", height: 1, type: ["grass", "poison"]}
-];
-// repository 2 for pokemon
 
-//arrow function
-pokemonList.forEach( item => console.log(item) );
+//add pokemon to the list, return all pokemon listed
+  return {
+    add: function(pokemon) {
+      pokemonList.push(pokemon);
+    },
+    getAll: function() {
+      return pokemonList;
+    }
+  };
+})();
+
+document.write(pokemonRepository.getAll());
+pokemonRepository.add({ name: 'blissey'});
+document.write(pokemonRepository.getAll());
+
+  //arrow function
+pokemonList.forEach( item => document.write(item) );
