@@ -4,7 +4,7 @@ let pokemonRepository = (function () {
 let pokemonList = [];
 let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
-
+//add pokemon function
 function add(pokemon) {
     if (
       typeof pokemon === "object" &&
@@ -18,6 +18,7 @@ function add(pokemon) {
 function getAll() {
   return pokemonList;
 }
+// function to pull the pokemon list and the button event
 function addListItem(pokemon){
   let pokemonList = document.querySelector(".pokemon-list");
   let listpokemon = document.createElement("li");
@@ -30,6 +31,7 @@ function addListItem(pokemon){
     console.log(pokemon);
   })
   }
+  //function to load the list from the pokeAPI
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -46,7 +48,7 @@ function addListItem(pokemon){
       console.error(e);
     })
   }
-
+  //function to load the details of the pokemon from api
   function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
@@ -59,12 +61,58 @@ function addListItem(pokemon){
       console.error(e);
     });
   }
-
+//function to show the pokemon details from api
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-    console.log(pokemon);
+    showModal(item);
   });
 }
+  //modal
+let modalContainer = document.querySelector("#modal-container");
+function showModal(item)
+   let modal = document.createElement("div");
+    modal.classList.add("modal");
+    let closeButtonElement = document.createElement("button");
+    closeButtonElement.classList.add("modal-close");
+    closeButtonElement.innerText = "Close";
+    closeButtonElement.addEventListener("click", hideModal);
+    let pokemonName = document.createElement("<h1>" + item.name + "</h1>");
+    pokemonName.innerText = title;
+
+    let pokemonHeight = document.createElement("<p>" + "Height: " + item.height "</p>");
+    pokemonHeight.innerText = text;
+
+    let pokemonImg = document.createElement("<p>" + "img" + "</p>");
+    myImage.src = "item.imageUrl"
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(pokemonName);
+    modal.appendChild(pokemonHeight);
+    modal.appendChild(pokemonImg);
+    modalContainer.appendChild(modal);
+
+    modalContainer.classList.add("is-visible");
+  }
+  document.querySelector("#show-modal").addEventListener("click", () => {
+    showModal("#modal-container");
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
+      hideModal();
+    }
+  });
+  modalContainer.addEventListener("click", (e) => {
+  let target = e.target;
+  if (target === modalContainer) {
+    hideModal();
+  }
+});
+})();
+
+
+
+
 
   return {
     add: add,
@@ -77,7 +125,7 @@ function addListItem(pokemon){
 })();
 
 
-
+//add pokemon extra blissey
 pokemonRepository.add({ name: "blissey", height: 5, types: ["normal"] });
 
 console.log(pokemonRepository.getAll());
