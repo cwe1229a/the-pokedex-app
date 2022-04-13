@@ -29,6 +29,7 @@ function addListItem(pokemon){
   pokemonList.appendChild(listpokemon);
   button.addEventListener("click", function(event) {
     console.log(pokemon);
+    showModal(pokemon);
   })
   }
   //function to load the list from the pokeAPI
@@ -91,33 +92,31 @@ pokemonRepository.getAll().forEach(function (pokemon) {
 });
 //modal
 let modalContainer = document.querySelector("#modal-container");
-function showModal(item) {
+function showModal(pokemon) {
  let modal = document.createElement("div");
   modal.classList.add("modal");
+
   let closeButtonElement = document.createElement("button");
   closeButtonElement.classList.add("modal-close");
   closeButtonElement.innerText = "Close";
   closeButtonElement.addEventListener("click", hideModal);
-  let pokemonName = document.createElement("<h1>" + item.name + "</h1>");
-  pokemonName.innerText = title;
 
-  //let pokemonHeight = document.createElement("<p>" + "Height: " + item.height "</p>");
-  //pokemonHeight.innerText = text;
+  let titleElement = document.createElement("h1");
+  titleElement.innerText = pokemon.name;
 
-  let pokemonImg = document.createElement("<p>" + "img" + "</p>");
-  myImage.src = "item.imageUrl"
+  let contentElement = document.createElement("p");
+  contentElement.innerText = "Height: 123";
+
+  //let pokemonImg = document.createElement("<p>" + "img" + "</p>");
+  //myImage.src = "item.imageUrl"
 
   modal.appendChild(closeButtonElement);
-  modal.appendChild(pokemonName);
-  modal.appendChild(pokemonHeight);
-  modal.appendChild(pokemonImg);
+  modal.appendChild(titleElement);
+  modal.appendChild(contentElement);
   modalContainer.appendChild(modal);
 
   modalContainer.classList.add("is-visible");
 }
-document.querySelector("#show-modal").addEventListener("click", () => {
-  showModal("#modal-container");
-});
 
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
@@ -130,3 +129,6 @@ if (target === modalContainer) {
   hideModal();
 }
 });
+function hideModal() {
+  modalContainer.classList.remove("is-visible");
+}
