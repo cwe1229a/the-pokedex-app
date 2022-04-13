@@ -105,10 +105,11 @@ function showModal(pokemon) {
   titleElement.innerText = pokemon.name;
 
   let contentElement = document.createElement("p");
-  contentElement.innerText = "Height: 123";
+  contentElement.innerText = "Height: " + pokemon.height;
 
-  //let pokemonImg = document.createElement("<p>" + "img" + "</p>");
-  //myImage.src = "item.imageUrl"
+  //let contentElement = document.creatElement("p");
+  //contentElement.innerText = pokemon.imageUrl;
+
 
   modal.appendChild(closeButtonElement);
   modal.appendChild(titleElement);
