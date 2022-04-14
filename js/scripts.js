@@ -28,8 +28,13 @@ function addListItem(pokemon){
   listpokemon.appendChild(button);
   pokemonList.appendChild(listpokemon);
   button.addEventListener("click", function(event) {
-    console.log(pokemon);
-    showModal(pokemon);
+    fetch("https://pokeapi.co/api/v2/pokemon/${pokemon.name}")
+    .then(response=>response.json())
+    .then(response=>{
+      pokemon.height = response.height;
+      showModal(pokemon);
+    })
+    .catch(err=>console.error(err))
   })
   }
   //function to load the list from the pokeAPI
@@ -93,6 +98,7 @@ pokemonRepository.getAll().forEach(function (pokemon) {
 //modal
 let modalContainer = document.querySelector("#modal-container");
 function showModal(pokemon) {
+  modalContainer.innerHTML = "";
  let modal = document.createElement("div");
   modal.classList.add("modal");
 
