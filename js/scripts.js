@@ -28,10 +28,11 @@ function addListItem(pokemon){
   listpokemon.appendChild(button);
   pokemonList.appendChild(listpokemon);
   button.addEventListener("click", function(event) {
-    fetch("https://pokeapi.co/api/v2/pokemon/${pokemon.name}")
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
     .then(response=>response.json())
     .then(response=>{
       pokemon.height = response.height;
+      pokemon.image = response.sprites.front_default;
       showModal(pokemon);
     })
     .catch(err=>console.error(err))
@@ -113,12 +114,13 @@ function showModal(pokemon) {
   let contentElement = document.createElement("p");
   contentElement.innerText = "Height: " + pokemon.height;
 
-  //let contentElement = document.creatElement("p");
-  //contentElement.innerText = pokemon.imageUrl;
+  let pokemonImage = document.createElement("img");
+  pokemonImage.src = pokemon.image;
 
 
   modal.appendChild(closeButtonElement);
   modal.appendChild(titleElement);
+  modal.appendChild(pokemonImage);
   modal.appendChild(contentElement);
   modalContainer.appendChild(modal);
 
