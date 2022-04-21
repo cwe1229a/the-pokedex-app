@@ -29,16 +29,6 @@ function addListItem(pokemon){
   button.setAttribute("data-target", "#pokemonModal");
   listpokemon.appendChild(button);
   pokemonList.appendChild(listpokemon);
-  button.addEventListener("click", function(event) {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-    .then(response=>response.json())
-    .then(response=>{
-      pokemon.height = response.height;
-      pokemon.image = response.sprites.front_default;
-      showModal(pokemon);
-    })
-    .catch(err=>console.error(err))
-  })
   }
   //function to load the list from the pokeAPI
   function loadList() {
