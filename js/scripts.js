@@ -24,7 +24,9 @@ function addListItem(pokemon){
   let listpokemon = document.createElement("li");
   let button = document.createElement("button");
   button.innerText = pokemon.name;
-  button.classList.add("button-class");
+  button.classList.add("btn-primary","w-50");
+  button.setAttribute("data-toggle", "modal")
+  button.setAttribute("data-target", "#pokemonModal");
   listpokemon.appendChild(button);
   pokemonList.appendChild(listpokemon);
   button.addEventListener("click", function(event) {
@@ -85,10 +87,6 @@ function addListItem(pokemon){
   };
 })();
 
-
-//add pokemon extra blissey
-pokemonRepository.add({ name: "blissey", height: 5, types: ["normal"] });
-
 console.log(pokemonRepository.getAll());
 
 pokemonRepository.loadList().then(function() {
@@ -96,17 +94,13 @@ pokemonRepository.getAll().forEach(function (pokemon) {
   pokemonRepository.addListItem(pokemon);
 });
 });
-//modal
-let modalContainer = document.querySelector("#modal-container");
-function showModal(pokemon) {
-  modalContainer.innerHTML = "";
- let modal = document.createElement("div");
-  modal.classList.add("modal");
 
-  let closeButtonElement = document.createElement("button");
-  closeButtonElement.classList.add("modal-close");
-  closeButtonElement.innerText = "Close";
-  closeButtonElement.addEventListener("click", hideModal);
+
+function showModal(pokemon) {
+  let modalBody = $(".modal-body");
+  let modalTitle = $(".modal-title");
+  let modalHeader = $(".modal-header");
+
 
   let titleElement = document.createElement("h1");
   titleElement.innerText = pokemon.name;
@@ -117,27 +111,11 @@ function showModal(pokemon) {
   let pokemonImage = document.createElement("img");
   pokemonImage.src = pokemon.image;
 
+  modalTitle.empty();
+  modalBody.empty();
 
-  modal.appendChild(closeButtonElement);
-  modal.appendChild(titleElement);
-  modal.appendChild(pokemonImage);
-  modal.appendChild(contentElement);
-  modalContainer.appendChild(modal);
+  modalTitle.appendChild(titleElement);
+  modalBody.appendChild(pokemonImage);
+  modalBody.appendChild(contentElement);
 
-  modalContainer.classList.add("is-visible");
-}
-
-window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
-    hideModal();
-  }
-});
-modalContainer.addEventListener("click", (e) => {
-let target = e.target;
-if (target === modalContainer) {
-  hideModal();
-}
-});
-function hideModal() {
-  modalContainer.classList.remove("is-visible");
 }
