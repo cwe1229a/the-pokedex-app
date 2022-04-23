@@ -25,10 +25,20 @@ a {
 }
 
 button.btn-primary {
-  display: inline-block;
+display: inline-block;
 background-color:#a63a50;
 color:#ffffff;
 border: 5px solid #ab9b96;
+text-align:center;
+margin-top:2px;
+padding: 5px 15px;
+}
+
+button.btn-search {
+display: inline-block;
+background-color:#ab9b96;
+color:#ffffff;
+border: 5px solid #a63a50;
 text-align:center;
 margin-top:2px;
 padding: 5px 15px;

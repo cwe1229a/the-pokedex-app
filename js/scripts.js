@@ -22,9 +22,10 @@ function getAll() {
 function addListItem(pokemon){
   let pokemonList = document.querySelector(".pokemon-list");
   let listpokemon = document.createElement("li");
+  listpokemon.classList.add("group-list-item");
   let button = document.createElement("button");
   button.innerText = pokemon.name;
-  button.classList.add("btn-primary","w-50");
+  button.classList.add("btn-primary","search-button", "w-50");
   button.setAttribute("data-toggle", "modal")
   button.setAttribute("data-target", "#pokemonModal");
   listpokemon.appendChild(button);
