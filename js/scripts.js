@@ -5,6 +5,9 @@ let pokemonRepository = (function () {
 	let pokemonList = [];
 	let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
+	function getAll() {
+		return pokemonList;
+	}
 	//add pokemon function
 	function add(pokemon) {
 		if (
@@ -12,24 +15,24 @@ let pokemonRepository = (function () {
       "name" in pokemon
 		) {
 			pokemonList.push(pokemon);
+		} else {
+			console.log("Error!");
 		}
 	}
-	function getAll() {
-		return pokemonList;
-	}
+
 	// function to pull the pokemon list and the button event
 	function addListItem(pokemon){
 		let pokemonList = document.querySelector(".pokemon-list");
-		let listpokemon = document.createElement("li");
-		listpokemon.classList.add("group-list-item");
+		let listPokemon = document.createElement("li");
+		listPokemon.classList.add("group-list-item");
 		let button = document.createElement("button");
 		button.innerText = pokemon.name;
 		button.classList.add("btn-primary", "w-50");
 		button.setAttribute("data-toggle", "modal");
 		button.setAttribute("data-target", "#pokemonModal");
 		button.onclick = () => showDetails(pokemon);
-		listpokemon.append(button);
-		pokemonList.append(listpokemon);
+		listPokemon.append(button);
+		pokemonList.append(listPokemon);
 	}
 	//function to load the list from the pokeAPI
 	function loadList() {
@@ -39,7 +42,7 @@ let pokemonRepository = (function () {
 			json.results.forEach(function (item){
 				let pokemon = {
 					name: item.name,
-					detasilsUrl: item.url,
+					detailsUrl: item.url,
 				};
 				add(pokemon);
 			});
@@ -69,8 +72,8 @@ let pokemonRepository = (function () {
 	//function to show the pokemon details from api
 	function showDetails(pokemon) {
 		return loadDetails(pokemon)
-			.then(function (item) {
-				return showModal(item);
+			.then(function (pokemon) {
+				return showModal(pokemon);
 			});
 		//loadDetails(pokemon).then(function () {
 		//showModal(pokemon);
@@ -98,8 +101,6 @@ pokemonRepository.loadList().then(function() {
 function showModal(pokemon) {
 	let modalBody = $(".modal-body");
 	let modalTitle = $(".modal-title");
-
-
 
 	let titleElement = document.createElement("h1");
 	titleElement.innerText = pokemon.name;
