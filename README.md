@@ -1,5 +1,5 @@
 # the-pokedex-app
-**first JS project for full stack development course**
+**My first JS Project using the PokeAPI to display various information about the first 150 Pokemon**
 
 ## Languages and technologies used
 * html
